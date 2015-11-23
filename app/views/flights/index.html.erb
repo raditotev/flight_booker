@@ -1,0 +1,41 @@
+<h1>Flights</h1>
+
+<%= form_for(:flight, url: root_url, method: "get") do |f|%>
+  <%= f.select(:departing_airport_id, @airport_options, include_blank: "From") %>
+  <%= f.select(:arrival_airport_id, @airport_options, include_blank: "To") %>
+  <%= f.select(:date, @date_options, include_blank: "Date") %>
+  <%= select_tag(:passangers, options_for_select(1..4), include_blank: "Number of passangers") %>
+  <%= f.submit("Search") %>
+<% end %>
+
+
+<% if @flights %>
+  <%= form_for(:booking, url: booking_path, method: "get") do |f| %>
+<table>
+  <thead>
+  <tr>
+    <th>Select</th>
+    <th>Flight</th>
+    <th>Date</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Duration</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @flights.each do |flight| %>
+    <td><%= f.radio_button :flight_id, flight.id %></td>
+    <td><%= flight.id %></td>
+    <td><%= flight.date %></td>
+    <td><%= flight.departing_airport.name %></td>
+    <td><%= flight.arrival_airport.name %></td>
+    <td><%= flight.duration %></td>
+    <td><%= f.hidden_field :passengers, value: @passengers %></td>
+    <td><%= f.submit "Select flight" %></td>
+  <% end %>
+  </tbody>
+</table>
+  <% end %>
+<% end %>
+
+
