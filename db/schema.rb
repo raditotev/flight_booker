@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123102156) do
+ActiveRecord::Schema.define(version: 20151123111612) do
 
   create_table "airports", force: :cascade do |t|
     t.string   "name"
@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 20151123102156) do
   add_index "airports", ["flight_id"], name: "index_airports_on_flight_id"
 
   create_table "flights", force: :cascade do |t|
-    t.integer  "from_airport"
-    t.integer  "to_airport"
+    t.integer  "departing_airport_id"
+    t.integer  "arrival_airport_id"
     t.date     "date"
     t.string   "duration"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
 end

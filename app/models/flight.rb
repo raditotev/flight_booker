@@ -1,3 +1,4 @@
 class Flight < ActiveRecord::Base
-  has_and_belongs_to_many :airports
+  belongs_to :departing_airport, class_name: "Airport"
+  belongs_to :arrival_airport, class_name: "Airport"
 end
