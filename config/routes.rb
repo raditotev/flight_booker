@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'bookings/new'
+
   root 'flights#index'
   get 'booking' => 'bookings#new'
+  post 'booking' => 'bookings#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
