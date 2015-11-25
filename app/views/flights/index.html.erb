@@ -1,11 +1,15 @@
 <h1>Flights</h1>
 
-<%= form_for(:flight, url: root_url, method: "get") do |f|%>
-  <%= f.select(:departing_airport_id, @airport_options, include_blank: "From") %>
-  <%= f.select(:arrival_airport_id, @airport_options, include_blank: "To") %>
-  <%= f.select(:date, @date_options, include_blank: "Date") %>
-  <%= select_tag(:passengers, options_for_select(1..4), include_blank: "Number of passengers") %>
-  <%= f.submit("Search") %>
+<%= form_tag(root_url, method: "get") do %>
+  <%= select_tag(:departing_airport_id, options_for_select(@airport_options),
+                            include_blank: "From") %>
+  <%= select_tag(:arrival_airport_id, options_for_select(@airport_options),
+                            include_blank: "To") %>
+  <%= select_tag(:date, options_for_select(@date_options),
+                            include_blank: "Date") %>
+  <%= select_tag(:passengers, options_for_select(1..4),
+                            include_blank: "Number of passengers") %>
+  <%= submit_tag "Search flights" %>
 <% end %>
 
 
@@ -26,11 +30,11 @@
   <% @flights.each do |flight| %>
     <td><%= radio_button_tag :flight_id, flight.id %></td>
     <td><%= flight.id %></td>
-    <td><%= flight.date %></td>
+    <td><%= flight.date.strftime("%d %B %Y") %></td>
     <td><%= flight.departing_airport.name %></td>
     <td><%= flight.arrival_airport.name %></td>
     <td><%= flight.duration %></td>
-    <td><%= hidden_field_tag :passengers, @passengers %></td>
+    <td><%= hidden_field_tag :passengers, params[:passengers] %></td>
     <td><%= f.submit "Select flight" %></td>
   <% end %>
   </tbody>
