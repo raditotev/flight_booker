@@ -29,10 +29,6 @@ end
 
 # Flights
 
-dates_list = [
-  [1.day.from_now]
-]
-
 duration = {
   "SOF-LGW" => "2 hours and 30 minutes", "LGW-SOF" => "2 hours and 30 minutes",
   "SOF-FRA" => "1 hour and 30 minutes", "FRA-SOF" => "1 hour and 30 minutes",

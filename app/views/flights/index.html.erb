@@ -1,45 +1,56 @@
-<h1>Flights</h1>
+<h1 class="center">Find Flights</h1>
 
-<%= form_tag(root_url, method: "get") do %>
-  <%= select_tag(:departing_airport_id, options_for_select(@airport_options),
-                            include_blank: "From") %>
-  <%= select_tag(:arrival_airport_id, options_for_select(@airport_options),
-                            include_blank: "To") %>
-  <%= select_tag(:date, options_for_select(@date_options),
-                            include_blank: "Date") %>
-  <%= select_tag(:passengers, options_for_select(1..4),
-                            include_blank: "Number of passengers") %>
-  <%= submit_tag "Search flights" %>
-<% end %>
+<div class="form-inline center">
+    <%= form_tag(root_url, method: "get") do %>
+
+    <%= select_tag(:departing_airport_id, options_for_select(@airport_options),
+    include_blank: "From", class: "form-control") %>
+    <%= select_tag(:arrival_airport_id, options_for_select(@airport_options),
+    include_blank: "To", class: "form-control") %>
+    <%= select_tag(:date, options_for_select(@date_options),
+    include_blank: "Date", class: "form-control") %>
+    <%= select_tag(:passengers, options_for_select(1..4),
+    include_blank: "Passengers", class: "form-control") %>
+    <%= submit_tag "Search", class:"btn btn-default" %>
+    <% end %>
+</div>
 
 
-<% if @flights %>
-  <%= form_for(:booking, url: bookings_path, method: "get") do |f| %>
-<table>
+
+
+
+<% if @flights.any? %>
+
+<h1 class="select-flight">Select Flight</h1>
+
+<table class="table">
   <thead>
-  <tr>
-    <th>Select</th>
-    <th>Flight</th>
-    <th>Date</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Duration</th>
-  </tr>
+    <tr>
+      <th>Select</th>
+      <th>Flight</th>
+      <th>Date</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Duration</th>
+    </tr>
   </thead>
   <tbody>
-  <% @flights.each do |flight| %>
+  <%= form_for(:booking, url: bookings_path, method: "get") do |f| %>
+    <% @flights.each do |flight| %>
     <td><%= radio_button_tag :flight_id, flight.id %></td>
     <td><%= flight.id %></td>
-    <td><%= flight.date.strftime("%d %B %Y") %></td>
+    <td><%= flight.date.strftime("%d %m %Y") %></td>
     <td><%= flight.departing_airport.name %></td>
     <td><%= flight.arrival_airport.name %></td>
     <td><%= flight.duration %></td>
     <td><%= hidden_field_tag :passengers, params[:passengers] %></td>
-    <td><%= f.submit "Select flight" %></td>
+    <td><%= f.submit "Select flight", class: "btn btn-primary" %></td>
+    <% end %>
   <% end %>
   </tbody>
 </table>
-  <% end %>
+
+
 <% end %>
 
 

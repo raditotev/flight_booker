@@ -1,10 +1,20 @@
-<h1>Book flight</h1>
+<h1 class="center">Book flight</h1>
+
+
 
 <%= form_for @booking do |f| %>
-  <%= f.hidden_field :flight_id %>
-  <%= f.fields_for :passengers do |ff| %>
-    <p>First name: <%= ff.text_field :first_name %></p>
-    <p>Last name: <%= ff.text_field :last_name %></p>
+<%= f.hidden_field :flight_id %>
+<% count = 1 %>
+<%= f.fields_for :passengers do |ff| %>
+<div class="form-inline center">
+  <div class="form-group">
+    <%= ff.label "#{count.ordinalize} passenger:" %>
+    <%= ff.text_field :first_name, placeholder: "First name" %>
+    <%= ff.text_field :last_name, placeholder: "Last name" %>
+  </div>
+  <% count += 1 %>
   <% end %>
-  <div class="button"><%= f.submit "Book" %></div class="button">
+</div>
+<%= f.submit "Book", class:"btn btn-primary" %>
 <% end %>
+
