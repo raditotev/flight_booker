@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Thank you for booking with us!</h1>
+  <h2>Your booking details</h2>
+  <h3>Flight No. <%= @flight.id %> from <%= @flight.departing_airport.name %>(<%= @flight.departing_airport.code %>) to <%= @flight.arrival_airport.name %>(<%= @flight.arrival_airport.code %>)</h3>
+  <p>
+    <strong>Flying on <%= @flight.date.strftime("%d %B %Y") %></strong>
+  </p>
+  <p>
+    <strong>Passengers:</strong>
+  </p>
+  <% @passengers.each do |p| %>
+  <p>
+    <%= p.first_name %> <%= p.last_name %>
+  </p>
+  <% end %>
+</body>
+</html>

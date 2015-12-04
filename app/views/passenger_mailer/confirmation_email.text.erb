@@ -1,0 +1,14 @@
+Thank you for booking with us!
+===============================================
+
+Your booking details
+---------------------------------------------
+
+Flight No. <%= @flight.id %> from <%= @flight.departing_airport.name %>(<%= @flight.departing_airport.code %>) to <%= @flight.arrival_airport.name %>(<%= @flight.arrival_airport.code %>)
+
+Flying on <%= @flight.date.strftime("%d %B %Y") %>
+
+Passengers:
+<% @passengers.each do |p| %>
+<%= p.first_name %> <%= p.last_name %>
+<% end %>
